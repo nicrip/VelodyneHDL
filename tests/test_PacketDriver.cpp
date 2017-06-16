@@ -17,5 +17,5 @@ int main()
     std::cout << "Length of packet: " << (*data).length() << std::endl;
   }
 
-	return 0;
+  return 0;
 }
