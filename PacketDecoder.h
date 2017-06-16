@@ -95,6 +95,7 @@ public:
   void SetCorrectionsFile(const std::string& corrections_file);
   std::deque<HDLFrame> GetFrames();
   void ClearFrames();
+  bool GetLatestFrame(HDLFrame* frame);
 
 protected:
   void UnloadData();

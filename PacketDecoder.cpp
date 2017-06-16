@@ -252,3 +252,13 @@ void PacketDecoder::ClearFrames()
 {
   _frames.clear();
 }
+
+bool PacketDecoder::GetLatestFrame(PacketDecoder::HDLFrame* frame)
+{
+  if (_frames.size()) {
+    *frame = _frames.back();
+    _frames.clear();
+    return(true);
+  }
+  return(false);
+}
