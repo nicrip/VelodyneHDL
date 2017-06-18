@@ -76,6 +76,7 @@ void PacketDecoder::SplitFrame()
     _frames.pop_front();
   }
   _frames.push_back(*_frame);
+  delete _frame;
   _frame = new HDLFrame();
 }
 
