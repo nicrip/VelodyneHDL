@@ -27,6 +27,12 @@ target_link_libraries(test_PacketDecoder
   pcap
 )
 
+add_executable(test_PacketWriter tests/test_PacketWriter.cpp)
+target_link_libraries(test_PacketWriter
+  PacketDriver
+  pcap
+)
+
 add_executable(PacketFileSender PacketFileSender.cxx)
 target_link_libraries(PacketFileSender
   boost_system
