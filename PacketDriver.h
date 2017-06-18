@@ -12,8 +12,10 @@ static unsigned int DATA_PORT = 2368;
 class PacketDriver
 {
 public:
+  PacketDriver();
   PacketDriver(unsigned int port);
   virtual ~PacketDriver();
+  void InitPacketDriver(unsigned int port);
   bool GetPacket(std::string* data, unsigned int* data_length);
 
 protected:
