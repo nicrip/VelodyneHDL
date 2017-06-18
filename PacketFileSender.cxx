@@ -29,7 +29,7 @@
 // .SECTION Description
 // This program reads a pcap file and sends the packets using UDP.
 
-#include "vtkPacketFileReader.h"
+#include "PacketFileReader.h"
 
 #include <string>
 #include <cstdlib>

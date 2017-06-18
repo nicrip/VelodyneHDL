@@ -10,8 +10,10 @@ using namespace std;
 
 int main()
 {
-  PacketDriver driver(DATA_PORT);
+  PacketDriver driver;
+  driver.InitPacketDriver(DATA_PORT);
   PacketDecoder decoder;
+  decoder.SetCorrectionsFile("../32db.xml");
 
   std::string* data = new std::string();
   unsigned int* dataLength = new unsigned int();
