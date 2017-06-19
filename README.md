@@ -15,10 +15,10 @@ Under the tests directory you can find example code on how to use the PacketDriv
 
 #### Dependencies  
 
-###### PCAP Library  
+###### PCAP Library:
 sudo apt-get install libpcap-dev  
 
-###### Boost Libraries  
+###### Boost Libraries:
 sudo apt-get install libboost-all-dev  
 
 #### Build  
