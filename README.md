@@ -15,35 +15,35 @@ Under the tests directory you can find example code on how to use the PacketDriv
 
 #### Dependencies  
 
-##### PCAP Library  
+###### PCAP Library  
 sudo apt-get install libpcap-dev  
 
-##### Boost Libraries  
+###### Boost Libraries  
 sudo apt-get install libboost-all-dev  
 
 #### Build  
 
-##### Building:
+###### Building:
 > mkdir build  
 > cd build  
 > cmake ..  
 > make
 
-##### Add To Path:
+###### Add To Path:
 Add to your .bashrc:  
 export PATH="PATH:/..../path/to/build  
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/..../path/to/build"  
 
 #### Usage  
 
-##### Streaming PCAP File:
+###### Streaming PCAP File:
 PacketFileSender pcap_file.pcap  
 
-##### Interfacing to Velodyne:
+###### Interfacing to Velodyne:
 test_PacketDriver
 
-##### Interfacing to Velodyne and Decoding Packets:
+###### Interfacing to Velodyne and Decoding Packets:
 test_PacketDecoder
 
-##### Interfacing to Velodyne and Writing Packets to pcap File:
+###### Interfacing to Velodyne and Writing Packets to pcap File:
 test_PacketWriter
