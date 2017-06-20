@@ -6,7 +6,7 @@ Most Velodyne lidar drivers are needlessly complex, or specifically written for 
 #### Contains
  - PacketDriver: builds to PacketDriver.so, a library to read (via boost::asio) Velodyne packets streamed to UDP port 2368.
  - PacketDecoder: builds to PacketDecoder.so, a library to decode (convert to x, y, z, intensity, etc.) Velodyne packets.
- - PacketFileSender: builds to PacketFileSender, an executable to stream packets from a pcap file to UDP port 2368 (code from VTK)
+ - PacketFileSender: builds to PacketFileSender, an executable to stream packets from a pcap file to UDP port 2368 (slightly modified code from VTK)
  - PacketFileReader: a header file to read packets from a pcap file (code from VTK)
  - PacketFileWriter: a header file to write packets to a pcap file (code from VTK)
  
