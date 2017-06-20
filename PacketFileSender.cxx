@@ -29,6 +29,8 @@
 // .SECTION Description
 // This program reads a pcap file and sends the packets using UDP.
 
+#include "PacketDriver.h"
+#include "PacketDecoder.h"
 #include "PacketFileReader.h"
 
 #include <string>
@@ -71,6 +73,11 @@ int main(int argc, char* argv[])
     //socket.connect(destinationEndpoint);
 
     static unsigned long packetCounter = 0;
+    double systemTime = 0;
+    double prevSystemTime = 0;
+    double packetTime = 0;
+    double prevPacketTime = 0;
+    int microsec_sleep = 450;
 
     while (packetReader.IsOpen())
       {
@@ -96,7 +103,27 @@ int main(int argc, char* argv[])
           printf("total sent packets: %lu\n", packetCounter);
           }
 
-        boost::this_thread::sleep(boost::posix_time::microseconds(200));
+        unsigned char* data2 = const_cast<unsigned char*>(data);
+        HDLDataPacket* dataPacket = reinterpret_cast<HDLDataPacket *>(data2);
+        packetTime = (dataPacket->gpsTimestamp*1e-6);
+
+        timespec tp;
+        clock_gettime(CLOCK_REALTIME,&tp);
+        long long timestamp_s = (tp).tv_sec*1e9;
+        long long timestamp = (tp).tv_nsec + timestamp_s;
+        systemTime = ((double)timestamp)*1e-9;
+
+        if (prevPacketTime != 0 && prevSystemTime != 0) {
+          double packetDiff = packetTime-prevPacketTime;
+          double systemDiff = systemTime-prevSystemTime;
+          microsec_sleep = microsec_sleep - (systemDiff-packetDiff)*1e6;
+          //std::cout << packetDiff << ", " << systemDiff << ", " << microsec_sleep << std::endl;
+        }
+
+        prevSystemTime = systemTime;
+        prevPacketTime = packetTime;
+
+        boost::this_thread::sleep(boost::posix_time::microseconds(microsec_sleep));
       }
 
     }
