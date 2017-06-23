@@ -18,6 +18,7 @@ add_executable(test_PacketDriver tests/test_PacketDriver.cpp)
 target_link_libraries(test_PacketDriver
   PacketDriver
   pcap
+  pthread
 )
 
 add_executable(test_PacketDecoder tests/test_PacketDecoder.cpp)
@@ -25,12 +26,14 @@ target_link_libraries(test_PacketDecoder
   PacketDriver
   PacketDecoder
   pcap
+  pthread
 )
 
 add_executable(test_PacketWriter tests/test_PacketWriter.cpp)
 target_link_libraries(test_PacketWriter
   PacketDriver
   pcap
+  pthread
 )
 
 add_executable(PacketFileSender PacketFileSender.cxx)
@@ -38,4 +41,5 @@ target_link_libraries(PacketFileSender
   boost_system
   boost_thread
   pcap
+  rt
 )
