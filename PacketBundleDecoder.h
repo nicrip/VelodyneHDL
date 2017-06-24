@@ -1,50 +1,23 @@
-// Velodyne HDL Packet Decoder
+// Velodyne HDL Packet Bundle Decoder
 // Nick Rypkema (rypkema@mit.edu), MIT 2017
-// shared library to decode a Velodyne packet
+// shared library to decode a bundle of velodyne packets
 
-#ifndef PACKET_DECODER_H_INCLUDED
-#define PACKET_DECODER_H_INCLUDED
+#ifndef PACKET_BUNDLE_DECODER_H_INCLUDED
+#define PACKET_BUNDLE_DECODER_H_INCLUDED
 
 #include <string>
 #include <vector>
 #include <deque>
+#include "PacketBundler.h"
 
 namespace
 {
 #define HDL_Grabber_toRadians(x) ((x) * M_PI / 180.0)
 
-const int HDL_NUM_ROT_ANGLES = 36001;
-const int HDL_LASER_PER_FIRING = 32;
-const int HDL_MAX_NUM_LASERS = 64;
-const int HDL_FIRING_PER_PKT = 12;
-
 enum HDLBlock
 {
   BLOCK_0_TO_31 = 0xeeff,
   BLOCK_32_TO_63 = 0xddff
-};
-
-#pragma pack(push, 1)
-typedef struct HDLLaserReturn
-{
-  unsigned short distance;
-  unsigned char intensity;
-} HDLLaserReturn;
-#pragma pack(pop)
-
-struct HDLFiringData
-{
-  unsigned short blockIdentifier;
-  unsigned short rotationalPosition;
-  HDLLaserReturn laserReturns[HDL_LASER_PER_FIRING];
-};
-
-struct HDLDataPacket
-{
-  HDLFiringData firingData[HDL_FIRING_PER_PKT];
-  unsigned int gpsTimestamp;
-  unsigned char blank1;
-  unsigned char blank2;
 };
 
 struct HDLLaserCorrection
@@ -72,7 +45,7 @@ double *sin_lookup_table_;
 HDLLaserCorrection laser_corrections_[HDL_MAX_NUM_LASERS];
 }
 
-class PacketDecoder
+class PacketBundleDecoder
 {
 public:
   struct HDLFrame
@@ -88,10 +61,10 @@ public:
   };
 
 public:
-  PacketDecoder();
-  virtual ~PacketDecoder();
+  PacketBundleDecoder();
+  virtual ~PacketBundleDecoder();
   void SetMaxNumberOfFrames(unsigned int max_num_of_frames);
-  void DecodePacket(std::string* data, unsigned int* data_length);
+  void DecodeBundle(std::string* bundle, unsigned int* bundle_length);
   void SetCorrectionsFile(const std::string& corrections_file);
   std::deque<HDLFrame> GetFrames();
   void ClearFrames();
@@ -104,15 +77,13 @@ protected:
   void LoadHDL32Corrections();
   void SetCorrectionsCommon();
   void ProcessHDLPacket(unsigned char *data, unsigned int data_length);
-  void SplitFrame();
   void PushFiringData(unsigned char laserId, unsigned short azimuth, unsigned int timestamp, HDLLaserReturn laserReturn, HDLLaserCorrection correction);
 
 private:
   std::string _corrections_file;
-  unsigned int _last_azimuth;
   unsigned int _max_num_of_frames;
   HDLFrame* _frame;
   std::deque<HDLFrame> _frames;
 };
 
-#endif // PACKET_DECODER_H_INCLUDED
+#endif // PACKET_BUNDLE_DECODER_H_INCLUDED
