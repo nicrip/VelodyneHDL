@@ -7,37 +7,7 @@
 
 #include <string>
 #include <deque>
-
-namespace
-{
-const int HDL_NUM_ROT_ANGLES = 36001;
-const int HDL_LASER_PER_FIRING = 32;
-const int HDL_MAX_NUM_LASERS = 64;
-const int HDL_FIRING_PER_PKT = 12;
-
-#pragma pack(push, 1)
-typedef struct HDLLaserReturn
-{
-  unsigned short distance;
-  unsigned char intensity;
-} HDLLaserReturn;
-#pragma pack(pop)
-
-struct HDLFiringData
-{
-  unsigned short blockIdentifier;
-  unsigned short rotationalPosition;
-  HDLLaserReturn laserReturns[HDL_LASER_PER_FIRING];
-};
-
-struct HDLDataPacket
-{
-  HDLFiringData firingData[HDL_FIRING_PER_PKT];
-  unsigned int gpsTimestamp;
-  unsigned char blank1;
-  unsigned char blank2;
-};
-}
+#include "PacketDecoder.h"
 
 class PacketBundler
 {

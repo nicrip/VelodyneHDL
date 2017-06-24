@@ -8,42 +8,7 @@
 #include <string>
 #include <vector>
 #include <deque>
-#include "PacketBundler.h"
-
-namespace
-{
-#define HDL_Grabber_toRadians(x) ((x) * M_PI / 180.0)
-
-enum HDLBlock
-{
-  BLOCK_0_TO_31 = 0xeeff,
-  BLOCK_32_TO_63 = 0xddff
-};
-
-struct HDLLaserCorrection
-{
-  double azimuthCorrection;
-  double verticalCorrection;
-  double distanceCorrection;
-  double verticalOffsetCorrection;
-  double horizontalOffsetCorrection;
-  double sinVertCorrection;
-  double cosVertCorrection;
-  double sinVertOffsetCorrection;
-  double cosVertOffsetCorrection;
-};
-
-struct HDLRGB
-{
-  uint8_t r;
-  uint8_t g;
-  uint8_t b;
-};
-
-double *cos_lookup_table_;
-double *sin_lookup_table_;
-HDLLaserCorrection laser_corrections_[HDL_MAX_NUM_LASERS];
-}
+#include "PacketDecoder.h"
 
 class PacketBundleDecoder
 {
