@@ -34,6 +34,7 @@ Under the tests directory you can find example code on how to use the PacketDriv
 ###### Add To .bashrc:
 > export PATH="PATH:/..../path/to/build  
 > export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/..../path/to/build"  
+> export LIBRARY_PATH="$LIBRARY_PATH:/..../path/to/build"  
 > export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/..../path/to/source"
 
 #### Usage  
