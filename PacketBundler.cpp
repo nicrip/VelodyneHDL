@@ -45,8 +45,6 @@ void PacketBundler::BundleHDLPacket(unsigned char *data, unsigned int data_lengt
     return;
   }
 
-  _bundle->append(reinterpret_cast<const char*>(data), (size_t)data_length);
-
   HDLDataPacket* dataPacket = reinterpret_cast<HDLDataPacket *>(data);
 
   for (int i = 0; i < HDL_FIRING_PER_PKT; ++i) {
@@ -57,6 +55,8 @@ void PacketBundler::BundleHDLPacket(unsigned char *data, unsigned int data_lengt
     }
 
     _last_azimuth = firingData.rotationalPosition;
+
+    _bundle->append(reinterpret_cast<const char*>(data), (size_t)data_length);
   }
 }
 
