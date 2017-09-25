@@ -55,9 +55,9 @@ void PacketBundler::BundleHDLPacket(unsigned char *data, unsigned int data_lengt
     }
 
     _last_azimuth = firingData.rotationalPosition;
-
-    _bundle->append(reinterpret_cast<const char*>(data), (size_t)data_length);
   }
+
+  _bundle->append(reinterpret_cast<const char*>(data), (size_t)data_length);
 }
 
 void PacketBundler::SplitBundle()
