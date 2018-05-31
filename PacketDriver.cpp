@@ -2,6 +2,8 @@
 // Nick Rypkema (rypkema@mit.edu), MIT 2017
 // shared library to read a Velodyne HDL packet streaming over UDP
 
+#include <iostream>
+
 #include "PacketDriver.h"
 #include <boost/bind.hpp>
 
